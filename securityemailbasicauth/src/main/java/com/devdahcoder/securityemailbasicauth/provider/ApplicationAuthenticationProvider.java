@@ -1,6 +1,7 @@
 package com.devdahcoder.securityemailbasicauth.provider;
 
-import com.devdahcoder.securityemailbasicauth.user.contract.CustomUserDetails;
+import com.devdahcoder.securityemailbasicauth.user.contract.UserDetailsContract;
+import com.devdahcoder.securityemailbasicauth.user.repository.ApplicationUserRepository;
 import com.devdahcoder.securityemailbasicauth.user.service.ApplicationUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -17,12 +18,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class ApplicationAuthenticationProvider implements AuthenticationProvider {
 
 	private final PasswordEncoder passwordEncoder;
-	private final ApplicationUserService applicationUserService;
+	private final ApplicationUserRepository applicationUserRepository;
 
 	@Autowired
-	public ApplicationAuthenticationProvider(PasswordEncoder passwordEncoder, ApplicationUserService applicationUserService) {
+	public ApplicationAuthenticationProvider(PasswordEncoder passwordEncoder, ApplicationUserRepository applicationUserRepository) {
 
-		this.applicationUserService = applicationUserService;
+		this.applicationUserRepository = applicationUserRepository;
 
         this.passwordEncoder = passwordEncoder;
 
@@ -35,13 +36,13 @@ public class ApplicationAuthenticationProvider implements AuthenticationProvider
 
 		String password = authentication.getCredentials().toString();
 
-		CustomUserDetails applicationUserDetailsService = applicationUserService.loadUserByUsername(username);
+		UserDetailsContract applicationUserDetailsService = applicationUserRepository.loadUserByUsername(username);
 
 		return checkCredential(applicationUserDetailsService, username, password, passwordEncoder);
 
 	}
 
-	private Authentication checkCredential(CustomUserDetails user, String username, String password, PasswordEncoder passwordEncoder) {
+	private Authentication checkCredential(UserDetailsContract user, String username, String password, PasswordEncoder passwordEncoder) {
 //		passwordEncoder.matches(password, user.getPassword())
 		if (username.equals(user.getUsername())) {
 

@@ -1,12 +1,12 @@
 package com.devdahcoder.securityemailbasicauth.user.modal;
 
-import com.devdahcoder.securityemailbasicauth.user.contract.CustomUserDetails;
+import com.devdahcoder.securityemailbasicauth.user.contract.UserDetailsContract;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Collection;
 
-public class ApplicationUserDetails implements CustomUserDetails {
+public class ApplicationUserDetails implements UserDetailsContract {
 
 	private final ApplicationUser applicationUser;
 
@@ -23,6 +23,29 @@ public class ApplicationUserDetails implements CustomUserDetails {
 		return applicationUser.getAuthorities();
 
 	}
+
+	@Override
+	public String getFirstName() {
+
+		return applicationUser.getFirstName();
+
+	}
+
+	@Override
+	public String getLastName() {
+
+		return applicationUser.getLastName();
+
+	}
+
+	@Override
+	public Long getId() {
+
+		return applicationUser.getId();
+
+	}
+
+
 
 	@Override
 	public String getPassword() {

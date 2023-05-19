@@ -1,14 +1,19 @@
 package com.devdahcoder.securityemailbasicauth.user.repository;
 
-import com.devdahcoder.securityemailbasicauth.user.contract.CustomUserService;
+import com.devdahcoder.securityemailbasicauth.user.contract.UserDetailsContract;
+import com.devdahcoder.securityemailbasicauth.user.contract.UserServiceContract;
 import com.devdahcoder.securityemailbasicauth.user.service.ApplicationUserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Repository;
 
-public class ApplicationUserRepository implements CustomUserService {
+@Repository
+public class ApplicationUserRepository implements UserServiceContract {
 
     private final ApplicationUserService applicationUserService;
 
+    @Autowired
     public ApplicationUserRepository(ApplicationUserService applicationUserService) {
 
         this.applicationUserService = applicationUserService;
@@ -19,6 +24,13 @@ public class ApplicationUserRepository implements CustomUserService {
     public void createUser(UserDetails user) {
 
         applicationUserService.createUser(user);
+
+    }
+
+    @Override
+    public UserDetailsContract loadUserByUsername(String username) throws UsernameNotFoundException {
+
+        return applicationUserService.loadUserByUsername(username);
 
     }
 
@@ -40,11 +52,6 @@ public class ApplicationUserRepository implements CustomUserService {
     @Override
     public boolean userExists(String username) {
         return false;
-    }
-
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return null;
     }
 
 }

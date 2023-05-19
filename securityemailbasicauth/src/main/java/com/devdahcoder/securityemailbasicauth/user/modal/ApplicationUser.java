@@ -1,12 +1,12 @@
 package com.devdahcoder.securityemailbasicauth.user.modal;
 
-import com.devdahcoder.securityemailbasicauth.user.contract.CustomUserDetails;
+import com.devdahcoder.securityemailbasicauth.user.contract.UserDetailsContract;
 import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Collection;
 import java.util.List;
 
-public class ApplicationUser implements CustomUserDetails {
+public class ApplicationUser implements UserDetailsContract {
 
 	private Long id;
 	private String firstName;
