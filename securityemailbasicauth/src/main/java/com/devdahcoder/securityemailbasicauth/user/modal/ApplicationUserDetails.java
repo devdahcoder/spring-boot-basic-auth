@@ -63,7 +63,9 @@ public class ApplicationUserDetails implements UserDetailsContract {
 
 	@Override
 	public String getEmail() {
+
 		return applicationUser.getEmail();
+
 	}
 
 	@Override

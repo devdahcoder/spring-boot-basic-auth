@@ -1,5 +1,12 @@
 package com.devdahcoder.securityemailbasicauth.user.contract;
 
+import com.devdahcoder.securityemailbasicauth.user.modal.ApplicationUserResponseData;
 import org.springframework.security.provisioning.UserDetailsManager;
 
-public interface UserServiceContract extends UserDetailsManager {}
+import java.util.List;
+
+public interface UserServiceContract extends UserDetailsManager {
+
+    List<ApplicationUserResponseData> getAllUsers();
+
+}

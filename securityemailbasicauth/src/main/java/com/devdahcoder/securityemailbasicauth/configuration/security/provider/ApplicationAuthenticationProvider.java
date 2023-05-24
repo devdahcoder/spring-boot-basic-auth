@@ -1,8 +1,7 @@
-package com.devdahcoder.securityemailbasicauth.provider;
+package com.devdahcoder.securityemailbasicauth.configuration.security.provider;
 
 import com.devdahcoder.securityemailbasicauth.user.contract.UserDetailsContract;
 import com.devdahcoder.securityemailbasicauth.user.repository.ApplicationUserRepository;
-import com.devdahcoder.securityemailbasicauth.user.service.ApplicationUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;

@@ -2,14 +2,18 @@ package com.devdahcoder.securityemailbasicauth.user.service;
 
 import com.devdahcoder.securityemailbasicauth.user.contract.UserDetailsContract;
 import com.devdahcoder.securityemailbasicauth.user.contract.UserServiceContract;
+import com.devdahcoder.securityemailbasicauth.user.mapper.UserResultExtractor;
 import com.devdahcoder.securityemailbasicauth.user.mapper.UserRowMapper;
 import com.devdahcoder.securityemailbasicauth.user.modal.ApplicationUser;
 import com.devdahcoder.securityemailbasicauth.user.modal.ApplicationUserDetails;
+import com.devdahcoder.securityemailbasicauth.user.modal.ApplicationUserResponseData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class ApplicationUserService implements UserServiceContract {
@@ -20,6 +24,15 @@ public class ApplicationUserService implements UserServiceContract {
 	public ApplicationUserService(JdbcTemplate jdbcTemplate) {
 
 		this.jdbcTemplate = jdbcTemplate;
+
+	}
+
+	@Override
+	public List<ApplicationUserResponseData> getAllUsers() {
+
+		String sqlQuery = "select * from user";
+
+		return jdbcTemplate.query(sqlQuery, new UserResultExtractor());
 
 	}
 

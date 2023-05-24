@@ -1,7 +1,6 @@
 package com.devdahcoder.securityemailbasicauth.user.mapper;
 
-import com.devdahcoder.securityemailbasicauth.user.modal.ApplicationUser;
-import com.devdahcoder.securityemailbasicauth.user.modal.ApplicationUserDetails;
+import com.devdahcoder.securityemailbasicauth.user.modal.ApplicationUserResponseData;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
 
@@ -10,26 +9,28 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserResultExtractor implements ResultSetExtractor<List<ApplicationUser>> {
+public class UserResultExtractor implements ResultSetExtractor<List<ApplicationUserResponseData>> {
 
 	@Override
-	public List<ApplicationUser> extractData(ResultSet rs) throws SQLException, DataAccessException {
+	public List<ApplicationUserResponseData> extractData(ResultSet rs) throws SQLException, DataAccessException {
 
-		List<ApplicationUser> applicationUserList = new ArrayList<>();
+		List<ApplicationUserResponseData> applicationUserResponseDataList = new ArrayList<>();
 
 		while (rs.next()) {
 
-			ApplicationUser user = new ApplicationUser();
+			ApplicationUserResponseData applicationUserResponseData = new ApplicationUserResponseData();
 
-			user.setId(rs.getLong("id"));
-			user.setEmail(rs.getString("email"));
-			user.setUsername(rs.getString("username"));
+			applicationUserResponseData.setId(rs.getLong("id"));
+			applicationUserResponseData.setFirstName(rs.getString("firstName"));
+			applicationUserResponseData.setLastName((rs.getString("lastName")));
+			applicationUserResponseData.setEmail(rs.getString("email"));
+			applicationUserResponseData.setUsername(rs.getString("username"));
 
-			applicationUserList.add(user);
+			applicationUserResponseDataList.add(applicationUserResponseData);
 
 		}
 
-		return applicationUserList;
+		return applicationUserResponseDataList;
 
 	}
 
